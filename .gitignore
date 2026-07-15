@@ -1,0 +1,28 @@
+# OS Files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Editor backups
+*.bak
+*.tmp
+*.orig
+
+# Node (if anyone adds build tools later)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Environment files (should never contain secrets, but just in case)
+.env
+.env.local
+.env.*.local

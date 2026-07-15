@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Financial Planning Scenario Planner</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.min.js"></script>
+</head>
+<body>
+    <div class="page-wrapper">
+        <!-- Header -->
+        <header>
+            <div class="header-content">
+                <h1>Personal Financial Planning Scenario Planner</h1>
+                <p class="subtitle">Explore different financial futures with interactive scenarios</p>
+            </div>
+        </header>
+
+        <!-- Main content -->
+        <main>
+            <div class="container">
+                <!-- Disclaimer -->
+                <div class="disclaimer">
+                    <h2>⚠️ Educational Disclaimer</h2>
+                    <p>This tool is an <strong>educational demonstration</strong> only. It is <strong>not</strong> financial, investment, tax, or legal advice. The scenarios presented are simplified estimates and do not account for many real-world factors such as taxes, inflation variability, market volatility, fees, life changes, or economic conditions. Always consult with a qualified financial advisor before making financial decisions.</p>
+                </div>
+
+                <!-- Input Section -->
+                <section class="input-section">
+                    <h2>Your Financial Information</h2>
+
+                    <!-- Scenario Selector -->
+                    <div class="scenario-selector">
+                        <h3>Choose a Scenario</h3>
+                        <div class="button-group">
+                            <button class="scenario-btn active" data-scenario="moderate">
+                                <span class="scenario-name">Moderate</span>
+                                <span class="scenario-desc">Balanced assumptions</span>
+                            </button>
+                            <button class="scenario-btn" data-scenario="conservative">
+                                <span class="scenario-name">Conservative</span>
+                                <span class="scenario-desc">Cautious assumptions</span>
+                            </button>
+                            <button class="scenario-btn" data-scenario="optimistic">
+                                <span class="scenario-name">Optimistic</span>
+                                <span class="scenario-desc">Growth-focused</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Life Events -->
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="currentAge">
+                                Current Age
+                                <span class="help-icon" title="Your age in years">?</span>
+                            </label>
+                            <input type="number" id="currentAge" min="18" max="100" value="35">
+                            <span class="input-unit">years</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="retirementAge">
+                                Planned Retirement Age
+                                <span class="help-icon" title="Age when you plan to retire">?</span>
+                            </label>
+                            <input type="number" id="retirementAge" min="30" max="100" value="67">
+                            <span class="input-unit">years</span>
+                        </div>
+                    </div>
+
+                    <!-- Income and Savings -->
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="currentIncome">
+                                Current Annual Income
+                                <span class="help-icon" title="Your gross annual salary or income">?</span>
+                            </label>
+                            <span class="input-prefix">$</span>
+                            <input type="number" id="currentIncome" min="0" step="1000" value="60000">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="currentSavings">
+                                Current Savings
+                                <span class="help-icon" title="Total savings you have right now">?</span>
+                            </label>
+                            <span class="input-prefix">$</span>
+                            <input type="number" id="currentSavings" min="0" step="1000" value="25000">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="monthlySavings">
+                                Monthly Savings Contribution
+                                <span class="help-icon" title="Amount you save each month">?</span>
+                            </label>
+                            <span class="input-prefix">$</span>
+                            <input type="number" id="monthlySavings" min="0" step="100" value="500">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="incomeGrowth">
+                                Expected Annual Income Growth
+                                <span class="help-icon" title="Average annual salary increase (%)">?</span>
+                            </label>
+                            <input type="number" id="incomeGrowth" min="0" max="20" step="0.5" value="2.5">
+                            <span class="input-unit">% per year</span>
+                        </div>
+                    </div>
+
+                    <!-- Investment and Economics -->
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="investmentReturn">
+                                Expected Annual Investment Return
+                                <span class="help-icon" title="Average annual return on investments (%)">?</span>
+                            </label>
+                            <input type="number" id="investmentReturn" min="0" max="20" step="0.5" value="6.5">
+                            <span class="input-unit">% per year</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inflationRate">
+                                Expected Annual Inflation Rate
+                                <span class="help-icon" title="Average annual inflation (%)">?</span>
+                            </label>
+                            <input type="number" id="inflationRate" min="0" max="10" step="0.25" value="2.5">
+                            <span class="input-unit">% per year</span>
+                        </div>
+                    </div>
+
+                    <!-- Expenses -->
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="currentExpenses">
+                                Current Annual Expenses
+                                <span class="help-icon" title="What you spend each year now">?</span>
+                            </label>
+                            <span class="input-prefix">$</span>
+                            <input type="number" id="currentExpenses" min="0" step="1000" value="45000">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="retirementSpending">
+                                Expected Retirement Annual Spending
+                                <span class="help-icon" title="Amount you plan to spend annually in retirement">?</span>
+                            </label>
+                            <span class="input-prefix">$</span>
+                            <input type="number" id="retirementSpending" min="0" step="1000" value="40000">
+                        </div>
+                    </div>
+
+                    <!-- Major Expense -->
+                    <fieldset class="major-expense-section">
+                        <legend>Optional Major Future Expense</legend>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="hasMajorExpense">
+                                    <input type="checkbox" id="hasMajorExpense">
+                                    Include a major expense (e.g., education, home, travel)
+                                </label>
+                            </div>
+                        </div>
+
+                        <div id="majorExpenseFields" class="major-expense-fields" style="display: none;">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="majorExpenseDescription">
+                                        Description
+                                        <span class="help-icon" title="What is this expense for?">?</span>
+                                    </label>
+                                    <input type="text" id="majorExpenseDescription" placeholder="e.g., Education, Home Purchase">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="majorExpenseAmount">
+                                        Amount
+                                        <span class="help-icon" title="Total cost of the expense">?</span>
+                                    </label>
+                                    <span class="input-prefix">$</span>
+                                    <input type="number" id="majorExpenseAmount" min="0" step="1000" value="50000">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="majorExpenseYear">
+                                        Year It Occurs
+                                        <span class="help-icon" title="What year will this expense happen?">?</span>
+                                    </label>
+                                    <input type="number" id="majorExpenseYear" min="2025" max="2100" value="2030">
+                                    <span class="input-unit">year</span>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <!-- Control Buttons -->
+                    <div class="control-buttons">
+                        <button class="btn btn-secondary" id="resetBtn">Reset to Defaults</button>
+                        <button class="btn btn-secondary" id="exampleBtn">Load Example Scenario</button>
+                        <button class="btn btn-primary" onclick="window.print()">Print / Save as PDF</button>
+                    </div>
+                </section>
+
+                <!-- Results Section -->
+                <section class="results-section">
+                    <h2>Your Financial Projection</h2>
+
+                    <!-- Key Metrics -->
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <h3>Savings at Retirement</h3>
+                            <p class="metric-value" id="savingsAtRetirement">$0</p>
+                            <p class="metric-label">in <span id="yearsToRetirement">0</span> years</p>
+                        </div>
+
+                        <div class="metric-card">
+                            <h3>After Major Expense</h3>
+                            <p class="metric-value" id="savingsAfterMajor">$0</p>
+                            <p class="metric-label" id="majorExpenseLabel"></p>
+                        </div>
+
+                        <div class="metric-card">
+                            <h3>First-Year Retirement Spending</h3>
+                            <p class="metric-value" id="firstYearSpending">$0</p>
+                            <p class="metric-label">adjusted for inflation</p>
+                        </div>
+
+                        <div class="metric-card status-card" id="statusCard">
+                            <h3>Plan Status</h3>
+                            <p class="metric-value" id="planStatus">On Track</p>
+                            <p class="metric-label" id="planDetails">Good position</p>
+                        </div>
+                    </div>
+
+                    <!-- Gap/Surplus -->
+                    <div class="gap-section">
+                        <h3 id="gapTitle">Projected Gap or Surplus</h3>
+                        <div class="gap-display">
+                            <p class="gap-value" id="gapValue">$0</p>
+                            <p class="gap-explanation" id="gapExplanation">Your savings may not be sufficient for your retirement spending needs.</p>
+                        </div>
+                    </div>
+
+                    <!-- Chart -->
+                    <div class="chart-section">
+                        <h3>Year-by-Year Projection</h3>
+                        <div class="chart-container">
+                            <canvas id="projectionChart"></canvas>
+                        </div>
+                        <p class="chart-note">Chart shows total savings balance over time. The dashed line indicates your retirement year.</p>
+                    </div>
+
+                    <!-- Scenario Comparison -->
+                    <div class="scenario-comparison">
+                        <h3>Comparison of All Scenarios</h3>
+                        <div class="comparison-table-container">
+                            <table class="comparison-table">
+                                <thead>
+                                    <tr>
+                                        <th>Scenario</th>
+                                        <th>Investment Return</th>
+                                        <th>Income Growth</th>
+                                        <th>Inflation</th>
+                                        <th>Savings at Retirement</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="scenario-row" data-scenario="conservative">
+                                        <td><strong>Conservative</strong></td>
+                                        <td id="comp-conservative-return">4.0%</td>
+                                        <td id="comp-conservative-growth">1.5%</td>
+                                        <td id="comp-conservative-inflation">3.0%</td>
+                                        <td id="comp-conservative-savings">$0</td>
+                                        <td id="comp-conservative-status">—</td>
+                                    </tr>
+                                    <tr class="scenario-row" data-scenario="moderate">
+                                        <td><strong>Moderate</strong></td>
+                                        <td id="comp-moderate-return">6.5%</td>
+                                        <td id="comp-moderate-growth">2.5%</td>
+                                        <td id="comp-moderate-inflation">2.5%</td>
+                                        <td id="comp-moderate-savings">$0</td>
+                                        <td id="comp-moderate-status">—</td>
+                                    </tr>
+                                    <tr class="scenario-row" data-scenario="optimistic">
+                                        <td><strong>Optimistic</strong></td>
+                                        <td id="comp-optimistic-return">8.5%</td>
+                                        <td id="comp-optimistic-growth">3.5%</td>
+                                        <td id="comp-optimistic-inflation">2.0%</td>
+                                        <td id="comp-optimistic-savings">$0</td>
+                                        <td id="comp-optimistic-status">—</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Assumptions Display -->
+                    <div class="assumptions-section">
+                        <h3>Current Scenario Assumptions</h3>
+                        <div class="assumptions-grid">
+                            <div class="assumption-item">
+                                <span class="assumption-label">Investment Return</span>
+                                <span class="assumption-value" id="assume-return">6.5%</span>
+                            </div>
+                            <div class="assumption-item">
+                                <span class="assumption-label">Income Growth</span>
+                                <span class="assumption-value" id="assume-growth">2.5%</span>
+                            </div>
+                            <div class="assumption-item">
+                                <span class="assumption-label">Inflation Rate</span>
+                                <span class="assumption-value" id="assume-inflation">2.5%</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Methodology Section -->
+                <section class="methodology-section">
+                    <h2>How the Calculations Work</h2>
+                    <div class="methodology-content">
+                        <h3>Savings Growth</h3>
+                        <p>Each year, we:</p>
+                        <ol>
+                            <li>Start with the previous year's savings balance</li>
+                            <li>Add your annual savings (12 × monthly contribution)</li>
+                            <li>Apply investment returns: <code>New Balance = Balance × (1 + Return %)</code></li>
+                            <li>Deduct the major expense if it occurs that year</li>
+                        </ol>
+
+                        <h3>Income Growth</h3>
+                        <p>Your income increases each year: <code>New Income = Income × (1 + Growth %)</code></p>
+
+                        <h3>Inflation</h3>
+                        <p>Your retirement spending is adjusted for inflation from the starting year using: <code>Inflated Amount = Amount × (1 + Inflation %)^Years</code></p>
+
+                        <h3>Plan Status</h3>
+                        <p><strong>On Track:</strong> Your projected savings at retirement exceed your estimated spending needs.</p>
+                        <p><strong>At Risk:</strong> Your savings may not be sufficient without additional planning.</p>
+                        <p><strong>Off Track:</strong> You would need to increase savings, delay retirement, or reduce spending.</p>
+
+                        <h3>Important Limitations</h3>
+                        <ul>
+                            <li><strong>No taxes:</strong> This calculator doesn't account for income tax, capital gains tax, or investment taxes.</li>
+                            <li><strong>Fixed percentages:</strong> Real returns, growth, and inflation vary year to year.</li>
+                            <li><strong>No Social Security or pensions:</strong> Only your personal savings are modeled.</li>
+                            <li><strong>No withdrawals:</strong> After retirement, we assume you spend equally each year and don't model how long your savings will last.</li>
+                            <li><strong>Simple calculations:</strong> This is an educational tool, not a comprehensive financial plan.</li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <p>Personal Financial Planning Scenario Planner — Educational Demonstration</p>
+            <p style="font-size: 0.875rem; color: #666;">Not financial, investment, tax, or legal advice. Consult a qualified financial advisor.</p>
+        </footer>
+    </div>
+
+    <script src="calculations.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

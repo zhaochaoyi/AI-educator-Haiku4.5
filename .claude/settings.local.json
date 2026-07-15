@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -c \"/home/zhaochaoyi/Documents/AI Educators Pilot Haiku4.5/app.js\")",
+      "Bash(node -c \"/home/zhaochaoyi/Documents/AI Educators Pilot Haiku4.5/calculations.js\")",
+      "Bash(git init *)",
+      "Bash(git config *)",
+      "Bash(git add *)",
+      "Bash(git commit -m 'Initial commit: Personal Financial Planning Scenario Planner *)"
+    ]
+  }
+}
