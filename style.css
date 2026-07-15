@@ -143,6 +143,14 @@ header h1 {
     opacity: 0.95;
 }
 
+.subheading {
+    font-size: 0.95rem;
+    opacity: 0.85;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    margin-top: var(--spacing-xs);
+}
+
 main {
     flex: 1;
     padding: var(--spacing-lg);
